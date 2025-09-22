@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Portfólio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg-color: #ffffff;
+            --text-color: #495057;
+            --heading-color: #212529;
+            --primary-color: #007bff;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--heading-color);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        /* --- Filtros (Abas) --- */
+        #filter-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 2rem 0;
+        }
+
+        .filter-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background-color: #f1f1f1;
+            border-color: #ccc;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .filter-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+
+        /* --- Grid de Projetos --- */
+        #projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-content h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--heading-color);
+        }
+
+        .project-content p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-top: 1rem;
+            flex-grow: 1;
+        }
+
+        .project-tools {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            align-items: center;
+        }
+
+        .tool {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .tool svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .project-link {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 1.5rem;
+            display: inline-block;
+        }
+
+
+        /* --- Carrossel --- */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .carousel-track img,
+        .single-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 0.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 10;
+            transition: background-color 0.3s ease;
+            border-radius: 4px;
+        }
+
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .carousel-button.prev {
+            left: 0.5rem;
+        }
+
+        .carousel-button.next {
+            right: 0.5rem;
+        }
+
+
+        /* --- Lightbox (Modal) --- */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .lightbox.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 3rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            color: #fff;
+            cursor: pointer;
+            padding: 1rem;
+            user-select: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+        }
+
+        .lightbox-prev {
+            left: 1rem;
+        }
+
+        .lightbox-next {
+            right: 1rem;
+        }
+
+
+        /* --- Rodapé --- */
+        footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid #dee2e6;
+        }
+
+        footer h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--heading-color);
+        }
+
+        .devs-container {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .dev-card {
+            text-align: center;
+        }
+
+        .dev-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links a {
+            color: #34495e;
+            font-size: 1.8rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #3498db;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Nosso Portfólio</h1>
+            <p>Uma coleção dos nossos melhores projetos.</p>
+        </header>
+
+        <nav id="filter-tabs"></nav>
+
+        <main>
+            <div id="projects-container"></div>
+        </main>
+    </div>
+
+<footer>
+        <h2>Desenvolvedores</h2>
+        <div class="devs-container">
+            <div class="dev-card">
+                <h3>Cibelle Maciel da Costa</h3>
+                <div class="social-links">
+                    <a href="https://github.com/cibellemc" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/cibellemaciel/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="dev-card">
+                <h3>Victor José Pires Sena</h3>
+                <div class="social-links">
+                    <a href="https://github.com/Aik0o1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/victor-sena-30b0aa25a" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img src="" alt="Imagem do Projeto" class="lightbox-image">
+        <div class="lightbox-nav lightbox-prev">&#10094;</div>
+        <div class="lightbox-nav lightbox-next">&#10095;</div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const toolIcons = {
+                'Power BI': `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Power BI</title><path d="M1.424 0v24h12.195V15.385H1.424V0zM1.424 13.093h9.903v8.615H1.424v-8.615zm11.983-13.093v11.248h9.168V0h-9.168zm7.075 9.155h-4.982V2.29h4.982v6.863zM13.407 13.431v10.569h10.593c-2.38-2.38-3.125-3.125-6.73-6.73l-3.863-3.839z" fill="currentColor"/></svg>`,
+                'Looker': `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Looker</title><path d="M12.24 12.24a5.28 5.28 0 100-10.56 5.28 5.28 0 000 10.56zm0 2.4a7.68 7.68 0 110-15.36 7.68 7.68 0 010 15.36zM18.48 18.48a3.12 3.12 0 100-6.24 3.12 3.12 0 000 6.24z" fill="currentColor"/></svg>`,
+                'Desenvolvimento': `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Code</title><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" fill="currentColor"/></svg>`,
+                'Frontend': `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Frontend</title><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zM17.99 9.21c-.13.58-.21 1.17-.21 1.79 0 4.08-3.05 7.44-7 7.93V18c0-1.1.9-2 2-2v-1l-4.79-4.79C9.79 9.92 10.9 9 12 9c1.38 0 2.5 1.12 2.5 2.5 0 .69-.28 1.32-.73 1.77L12 15l5-5c.55-.55 1.25-1.24 1.25-2.25 0-1.5-1.5-2.5-2.75-2.5-.75 0-1.31.38-1.68.82L13 10l-1-1 1-1c.48-.48 1.1-1 1.9-1 2.25 0 4.1 2.25 4.1 4.5 0 1.19-.51 2.33-1.11 3.09L15 15v-1c0-1.1.9-2 2-2h.99z" fill="currentColor"/></svg>`,
+            };
+
+            const projects = [
+                {
+                    images: [
+                        './imgs/PowerBi/img1.png',
+
+                    ], title: 'Dashboard de dados econômicos',
+                    description: 'Painéis feitos com PowerBI',
+                    link: '#',
+                    tools: ['Power BI']
+                },
+                {
+                    images: [
+                        './imgs/PowerBi/img2.png'
+
+                    ], title: 'Dashboard de acompanhamento de processos',
+                    description: 'Painéis feitos com PowerBI',
+                    link: '#',
+                    tools: ['Power BI']
+                },
+                {
+                    images: [
+                        './imgs/Ranking Nacional/img1.png',
+                        './imgs/Ranking Nacional/img2.png'
+
+                    ],
+                    title: 'Ranking Nacional',
+                    description: 'Site para acompanhamento do ambiente de negócios no Brasil',
+                    link: 'https://rankingnacional.jucepi.pi.gov.br/',
+                    tools: ['Desenvolvimento']
+                },
+
+                 {
+                    images: [
+                        './imgs/Looker Studio/img1.png',
+
+                    ], title: 'Dashboard PI Digital',
+                    description: 'Painel de acompanhamento do Call Center',
+                    link: 'https://lookerstudio.google.com/reporting/0cff4a4c-30c4-4cd3-a2eb-3a165d86963a',
+                    tools: ['Looker Studio']
+                },
+
+                 {
+                    images: [
+                        './imgs/Looker Studio/img3.jpg',
+                        './imgs/Looker Studio/img2.jpg',
+                        './imgs/Looker Studio/img4.jpg',
+                        './imgs/Looker Studio/img5.jpg',
+                        './imgs/Looker Studio/img6.jpg',
+
+                    ], title: 'Dashboard Estatístico',
+                    description: 'Painéis feitos com Looker Studio',
+                    link: 'https://lookerstudio.google.com/reporting/b2877c58-3a79-42a5-90ae-5a57071d4403',
+                    tools: ['Looker Studio']
+                },
+
+                {
+                    images: [
+                        './imgs/Painel empresarial/img1.png',
+                        './imgs/Painel empresarial/img2.png',
+                        './imgs/Painel empresarial/img3.png'
+
+
+                    ],
+                    title: 'Painel empresarial',
+                    description: 'Backend robusto para uma plataforma de e-commerce, com endpoints para produtos, usuários e processamento de pedidos.',
+                    link: 'https://painelempresarial.jucepi.pi.gov.br/',
+                    tools: ['Desenvolvimento']
+                },
+
+            ];
+
+            const projectsContainer = document.getElementById('projects-container');
+            const filterTabsContainer = document.getElementById('filter-tabs');
+
+            function renderProjects(filter = 'todos') {
+                projectsContainer.innerHTML = '';
+                const filteredProjects = projects.filter(p =>
+                    filter === 'todos' || p.tools.map(t => t.toLowerCase().replace(/\s+/g, '-')).includes(filter)
+                );
+
+                filteredProjects.forEach((project, index) => {
+                    const projectCard = document.createElement('div');
+                    projectCard.classList.add('project-card');
+
+                    const toolsString = project.tools.map(t => t.toLowerCase().replace(/\s+/g, '-')).join(' ');
+                    projectCard.setAttribute('data-tools', toolsString);
+
+                    let mediaContent = '';
+                    const images = project.images || [project.image];
+                    if (images.length > 1) {
+                        const imagesTrack = images.map((src, imgIndex) => `<img src="${src}" alt="${project.title}" data-project-index="${index}" data-img-index="${imgIndex}">`).join('');
+                        // CORREÇÃO AQUI: Adicionada a div .carousel-track
+                        mediaContent = `
+                        <div class="carousel-container">
+                            <div class="carousel-track">${imagesTrack}</div>
+                            <button class="carousel-button prev">&#10094;</button>
+                            <button class="carousel-button next">&#10095;</button>
+                        </div>`;
+                    } else {
+                        mediaContent = `<div class="single-image"><img src="${images[0]}" alt="${project.title}" data-project-index="${index}" data-img-index="0"></div>`;
+                    }
+
+                    const toolsHTML = project.tools.map(tool => `
+                    <div class="tool" title="${tool}">
+                        ${toolIcons[tool] || ''}
+                        <span>${tool}</span>
+                    </div>
+                `).join('');
+
+                    projectCard.innerHTML = `
+                    ${mediaContent}
+                    <div class="project-content">
+                        <h2>${project.title}</h2>
+                        <p>${project.description}</p>
+                        <div class="project-tools">${toolsHTML}</div>
+                        ${project.link && project.link !== '#' ? `<a href="${project.link}" class="project-link" target="_blank">Ver Projeto &rarr;</a>` : ''}
+                    </div>
+                `;
+                    projectsContainer.appendChild(projectCard);
+                });
+                initializeCarousels();
+            }
+
+            function initializeFilters() {
+                const allTools = new Set(projects.flatMap(p => p.tools));
+                filterTabsContainer.innerHTML = `<button class="filter-btn active" data-filter="todos">Todos</button>`;
+                allTools.forEach(tool => {
+                    const toolId = tool.toLowerCase().replace(/\s+/g, '-');
+                    filterTabsContainer.innerHTML += `
+                    <button class="filter-btn" data-filter="${toolId}">
+                        ${toolIcons[tool] || ''}
+                        ${tool}
+                    </button>
+                `;
+                });
+
+                filterTabsContainer.addEventListener('click', (e) => {
+                    const filterBtn = e.target.closest('.filter-btn');
+                    if (!filterBtn) return;
+                    document.querySelector('.filter-btn.active').classList.remove('active');
+                    filterBtn.classList.add('active');
+                    renderProjects(filterBtn.dataset.filter);
+                });
+            }
+
+            function initializeCarousels() {
+                document.querySelectorAll('.carousel-container').forEach(container => {
+                    const track = container.querySelector('.carousel-track');
+                    // Adicionada uma verificação para segurança, caso track ainda seja nulo
+                    if (!track) return;
+
+                    const images = Array.from(track.children);
+                    const prevButton = container.querySelector('.carousel-button.prev');
+                    const nextButton = container.querySelector('.carousel-button.next');
+                    let currentIndex = 0;
+
+                    if (images.length <= 1) {
+                        prevButton.style.display = 'none';
+                        nextButton.style.display = 'none';
+                        return;
+                    }
+
+                    const updateCarousel = () => {
+                        const imageWidth = images[0].offsetWidth;
+                        track.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+                    };
+
+                    prevButton.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Impede que o clique no botão ative o lightbox
+                        currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;
+                        updateCarousel();
+                    });
+
+                    nextButton.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Impede que o clique no botão ative o lightbox
+                        currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;
+                        updateCarousel();
+                    });
+
+                    window.addEventListener('resize', updateCarousel);
+                });
+            }
+
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = lightbox.querySelector('.lightbox-image');
+            const lightboxClose = lightbox.querySelector('.lightbox-close');
+            const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+            const lightboxNext = lightbox.querySelector('.lightbox-next');
+            let currentLightboxImages = [];
+            let currentLightboxIndex = 0;
+
+            function showLightbox(images, startIndex) {
+                currentLightboxImages = images;
+                currentLightboxIndex = startIndex;
+                updateLightboxImage();
+                lightbox.classList.add('show');
+                lightboxPrev.style.display = images.length > 1 ? 'block' : 'none';
+                lightboxNext.style.display = images.length > 1 ? 'block' : 'none';
+            }
+
+            function hideLightbox() {
+                lightbox.classList.remove('show');
+            }
+
+            function updateLightboxImage() {
+                lightboxImg.src = currentLightboxImages[currentLightboxIndex];
+            }
+
+
+
+            function showPrevImage() {
+                currentLightboxIndex = (currentLightboxIndex === 0) ? currentLightboxImages.length - 1 : currentLightboxIndex - 1;
+                updateLightboxImage();
+            }
+
+            function showNextImage() {
+                currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+                updateLightboxImage();
+            }
+
+            projectsContainer.addEventListener('click', (e) => {
+                if (e.target.tagName === 'IMG') {
+                    const projectIndex = e.target.dataset.projectIndex;
+                    const imgIndex = parseInt(e.target.dataset.imgIndex);
+                    const projectData = projects.filter(p => {
+                        const currentFilter = document.querySelector('.filter-btn.active').dataset.filter;
+                        return currentFilter === 'todos' || p.tools.map(t => t.toLowerCase().replace(/\s+/g, '-')).includes(currentFilter);
+                    })[projectIndex];
+
+                    if (projectData) {
+                        const images = projectData.images || [projectData.image];
+                        showLightbox(images, imgIndex);
+                    }
+                }
+            });
+
+            lightboxClose.addEventListener('click', hideLightbox);
+            lightbox.addEventListener('click', (e) => e.target === lightbox && hideLightbox());
+            lightboxPrev.addEventListener('click', showPrevImage);
+            lightboxNext.addEventListener('click', showNextImage);
+            document.addEventListener('keydown', (e) => e.key === 'Escape' && hideLightbox());
+
+            initializeFilters();
+            renderProjects();
+        });
+    </script>
+</body>
+
+</html>
