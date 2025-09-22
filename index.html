@@ -98,6 +98,7 @@
             fill: currentColor;
         }
 
+
         /* --- Grid de Projetos --- */
         #projects-container {
             display: grid;
@@ -169,6 +170,7 @@
             display: inline-block;
         }
 
+
         /* --- Carrossel --- */
         .carousel-container {
             position: relative;
@@ -218,6 +220,7 @@
         .carousel-button.next {
             right: 0.5rem;
         }
+
 
         /* --- Lightbox (Modal) --- */
         .lightbox {
@@ -281,6 +284,7 @@
             right: 1rem;
         }
 
+
         /* --- Rodapé --- */
         footer {
             text-align: center;
@@ -322,23 +326,6 @@
         .social-links a:hover {
             color: #3498db;
         }
-
-        /* Estilo para imagens com erro */
-        .project-card img {
-            background-color: #f8f9fa;
-        }
-
-        .image-error {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 220px;
-            background-color: #f8f9fa;
-            color: #6c757d;
-            font-size: 0.9rem;
-            text-align: center;
-            border: 2px dashed #dee2e6;
-        }
     </style>
 </head>
 
@@ -363,15 +350,18 @@
             <div class="dev-card">
                 <h3>Cibelle Maciel da Costa</h3>
                 <div class="social-links">
-                    <a href="https://github.com/cibellemc" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/cibellemaciel/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/cibellemc" target="_blank" title="GitHub"><i
+                            class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/cibellemaciel/" target="_blank" title="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
                 </div>
             </div>
             <div class="dev-card">
                 <h3>Victor José Pires Sena</h3>
                 <div class="social-links">
                     <a href="https://github.com/Aik0o1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/victor-sena-30b0aa25a" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.linkedin.com/in/victor-sena-30b0aa25a" target="_blank" title="LinkedIn"><i
+                            class="fab fa-linkedin"></i></a>
                 </div>
             </div>
         </div>
@@ -384,6 +374,7 @@
         <div class="lightbox-nav lightbox-next">&#10095;</div>
     </div>
 
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -394,81 +385,35 @@
                 'Frontend': `<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Frontend</title><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zM17.99 9.21c-.13.58-.21 1.17-.21 1.79 0 4.08-3.05 7.44-7 7.93V18c0-1.1.9-2 2-2v-1l-4.79-4.79C9.79 9.92 10.9 9 12 9c1.38 0 2.5 1.12 2.5 2.5 0 .69-.28 1.32-.73 1.77L12 15l5-5c.55-.55 1.25-1.24 1.25-2.25 0-1.5-1.5-2.5-2.75-2.5-.75 0-1.31.38-1.68.82L13 10l-1-1 1-1c.48-.48 1.1-1 1.9-1 2.25 0 4.1 2.25 4.1 4.5 0 1.19-.51 2.33-1.11 3.09L15 15v-1c0-1.1.9-2 2-2h.99z" fill="currentColor"/></svg>`,
             };
 
-            // CAMINHOS CORRIGIDOS - removido o ./ inicial
             const projects = [
                 {
-                    images: [
-                        'imgs/powerbi/img1.png'
-                    ], 
-                    title: 'Dashboard de dados econômicos',
-                    description: 'Painéis feitos com PowerBI',
-                    link: '#',
-                    tools: ['Power BI']
+                    images: ['./imgs/powerbi/img1.png'],
+                    title: 'Dashboard de dados econômicos', description: 'Painéis feitos com PowerBI', link: '#', tools: ['Power BI']
                 },
                 {
-                    images: [
-                        'imgs/powerbi/img2.png'
-                    ], 
-                    title: 'Dashboard de acompanhamento de processos',
-                    description: 'Painéis feitos com PowerBI',
-                    link: '#',
-                    tools: ['Power BI']
+                    images: ['./imgs/powerbi/img2.png'],
+                    title: 'Dashboard de acompanhamento de processos', description: 'Painéis feitos com PowerBI', link: '#', tools: ['Power BI']
                 },
                 {
-                    images: [
-                        'imgs/ranking-nacional/img1.png',
-                        'imgs/ranking-nacional/img2.png'
-                    ],
-                    title: 'Ranking Nacional',
-                    description: 'Site para acompanhamento do ambiente de negócios no Brasil',
-                    link: 'https://rankingnacional.jucepi.pi.gov.br/',
-                    tools: ['Desenvolvimento']
+                    images: ['./imgs/ranking-nacional/img1.png', './imgs/ranking-nacional/img2.png'],
+                    title: 'Ranking Nacional', description: 'Site para acompanhamento do ambiente de negócios no Brasil', link: 'https://rankingnacional.jucepi.pi.gov.br/', tools: ['Desenvolvimento']
                 },
                 {
-                    images: [
-                        'imgs/looker-studio/img1.png'
-                    ], 
-                    title: 'Dashboard PI Digital',
-                    description: 'Painel de acompanhamento do Call Center',
-                    link: 'https://lookerstudio.google.com/reporting/0cff4a4c-30c4-4cd3-a2eb-3a165d86963a',
-                    tools: ['Looker Studio']
+                    images: ['./imgs/looker-studio/img1.png'],
+                    title: 'Dashboard PI Digital', description: 'Painel de acompanhamento do Call Center', link: 'https://lookerstudio.google.com/reporting/0cff4a4c-30c4-4cd3-a2eb-3a165d86963a', tools: ['Looker Studio']
                 },
                 {
-                    images: [
-                        'imgs/looker-studio/img3.jpg',
-                        'imgs/looker-studio/img2.jpg',
-                        'imgs/looker-studio/img4.jpg',
-                        'imgs/looker-studio/img5.jpg',
-                        'imgs/looker-studio/img6.jpg'
-                    ], 
-                    title: 'Dashboard Estatístico',
-                    description: 'Painéis feitos com Looker Studio',
-                    link: 'https://lookerstudio.google.com/reporting/b2877c58-3a79-42a5-90ae-5a57071d4403',
-                    tools: ['Looker Studio']
+                    images: ['./imgs/looker-studio/img3.jpg', './imgs/looker-studio/img2.jpg', './imgs/looker-studio/img4.jpg', './imgs/looker-studio/img5.jpg', './imgs/looker-studio/img6.jpg'],
+                    title: 'Dashboard Estatístico', description: 'Painéis feitos com Looker Studio', link: 'https://lookerstudio.google.com/reporting/b2877c58-3a79-42a5-90ae-5a57071d4403', tools: ['Looker Studio']
                 },
                 {
-                    images: [
-                        'imgs/painel-empresarial/img1.png',
-                        'imgs/painel-empresarial/img2.png',
-                        'imgs/painel-empresarial/img3.png'
-                    ],
-                    title: 'Painel empresarial',
-                    description: 'Backend robusto para uma plataforma de e-commerce, com endpoints para produtos, usuários e processamento de pedidos.',
-                    link: 'https://painelempresarial.jucepi.pi.gov.br/',
-                    tools: ['Desenvolvimento']
-                }
+                    images: ['./imgs/painel-empresarial/img1.png', './imgs/painel-empresarial/img2.png', './imgs/painel-empresarial/img3.png'],
+                    title: 'Painel empresarial', description: 'Plataforma para visualização e análise de dados sobre o cenário empresarial.', link: 'https://painelempresarial.jucepi.pi.gov.br/', tools: ['Desenvolvimento']
+                },
             ];
 
             const projectsContainer = document.getElementById('projects-container');
             const filterTabsContainer = document.getElementById('filter-tabs');
-
-            // Função para tratar erro de carregamento de imagem
-            function handleImageError(img, fallbackText = 'Imagem não encontrada') {
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'image-error';
-                errorDiv.innerHTML = `<div><i class="fas fa-image" style="font-size: 2rem; margin-bottom: 0.5rem; display: block;"></i>${fallbackText}</div>`;
-                img.parentNode.replaceChild(errorDiv, img);
-            }
 
             function renderProjects(filter = 'todos') {
                 projectsContainer.innerHTML = '';
@@ -476,36 +421,23 @@
                     filter === 'todos' || p.tools.map(t => t.toLowerCase().replace(/\s+/g, '-')).includes(filter)
                 );
 
-                filteredProjects.forEach((project, index) => {
+                filteredProjects.forEach((project) => {
                     const projectCard = document.createElement('div');
                     projectCard.classList.add('project-card');
 
-                    const toolsString = project.tools.map(t => t.toLowerCase().replace(/\s+/g, '-')).join(' ');
-                    projectCard.setAttribute('data-tools', toolsString);
+                    // MUDANÇA 1: Usar o índice do array ORIGINAL como ID do projeto
+                    const originalProjectIndex = projects.indexOf(project);
 
-                    let mediaContent = '';
                     const images = project.images || [project.image];
+                    let mediaContent = '';
                     if (images.length > 1) {
-                        const imagesTrack = images.map((src, imgIndex) => 
-                            `<img src="${src}" alt="${project.title}" data-project-index="${index}" data-img-index="${imgIndex}" onerror="handleImageError(this, 'Imagem ${imgIndex + 1} não encontrada')">`
-                        ).join('');
-                        
-                        mediaContent = `
-                        <div class="carousel-container">
-                            <div class="carousel-track">${imagesTrack}</div>
-                            <button class="carousel-button prev">&#10094;</button>
-                            <button class="carousel-button next">&#10095;</button>
-                        </div>`;
+                        const imagesTrack = images.map((src, imgIndex) => `<img src="${src}" alt="${project.title}" data-project-index="${originalProjectIndex}" data-img-index="${imgIndex}">`).join('');
+                        mediaContent = `<div class="carousel-container"><div class="carousel-track">${imagesTrack}</div><button class="carousel-button prev">&#10094;</button><button class="carousel-button next">&#10095;</button></div>`;
                     } else {
-                        mediaContent = `<div class="single-image"><img src="${images[0]}" alt="${project.title}" data-project-index="${index}" data-img-index="0" onerror="handleImageError(this, 'Imagem não encontrada')"></div>`;
+                        mediaContent = `<div class="single-image"><img src="${images[0]}" alt="${project.title}" data-project-index="${originalProjectIndex}" data-img-index="0"></div>`;
                     }
 
-                    const toolsHTML = project.tools.map(tool => `
-                    <div class="tool" title="${tool}">
-                        ${toolIcons[tool] || ''}
-                        <span>${tool}</span>
-                    </div>
-                `).join('');
+                    const toolsHTML = project.tools.map(tool => `<div class="tool" title="${tool}">${toolIcons[tool] || ''}<span>${tool}</span></div>`).join('');
 
                     projectCard.innerHTML = `
                     ${mediaContent}
@@ -521,20 +453,12 @@
                 initializeCarousels();
             }
 
-            // Tornar a função global para uso no onerror
-            window.handleImageError = handleImageError;
-
             function initializeFilters() {
                 const allTools = new Set(projects.flatMap(p => p.tools));
                 filterTabsContainer.innerHTML = `<button class="filter-btn active" data-filter="todos">Todos</button>`;
                 allTools.forEach(tool => {
                     const toolId = tool.toLowerCase().replace(/\s+/g, '-');
-                    filterTabsContainer.innerHTML += `
-                    <button class="filter-btn" data-filter="${toolId}">
-                        ${toolIcons[tool] || ''}
-                        ${tool}
-                    </button>
-                `;
+                    filterTabsContainer.innerHTML += `<button class="filter-btn" data-filter="${toolId}">${toolIcons[tool] || ''}${tool}</button>`;
                 });
 
                 filterTabsContainer.addEventListener('click', (e) => {
@@ -563,8 +487,10 @@
                     }
 
                     const updateCarousel = () => {
-                        const imageWidth = images[0].offsetWidth;
-                        track.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+                        if (images.length > 0) {
+                            const imageWidth = images[0].offsetWidth;
+                            track.style.transform = `translateX(-${currentIndex * imageWidth}px)`;
+                        }
                     };
 
                     prevButton.addEventListener('click', (e) => {
@@ -620,12 +546,11 @@
 
             projectsContainer.addEventListener('click', (e) => {
                 if (e.target.tagName === 'IMG') {
+                    // MUDANÇA 2: Lógica super simplificada para encontrar o projeto
                     const projectIndex = e.target.dataset.projectIndex;
                     const imgIndex = parseInt(e.target.dataset.imgIndex);
-                    const projectData = projects.filter(p => {
-                        const currentFilter = document.querySelector('.filter-btn.active').dataset.filter;
-                        return currentFilter === 'todos' || p.tools.map(t => t.toLowerCase().replace(/\s+/g, '-')).includes(currentFilter);
-                    })[projectIndex];
+
+                    const projectData = projects[projectIndex]; // Acessa diretamente o projeto correto
 
                     if (projectData) {
                         const images = projectData.images || [projectData.image];
